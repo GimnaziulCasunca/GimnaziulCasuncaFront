@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
 const logo = require('./favicon0.png');
 
@@ -50,8 +49,8 @@ export const AddStudentForm = () => {
           const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional  };
           let response;
           {selectedSem === "2"?
-            response = await axios.post('/newstud2', studentData):
-            response = await axios.post('/newstud', studentData)
+            response = await fetch.post('/newstud2', studentData):
+            response = await fetch.post('/newstud', studentData)
           }
            
           console.log(response.data); // Success message from the server
@@ -92,8 +91,8 @@ export const AddStudentForm = () => {
           const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
           let response;
           {selectedSem === "2"?
-            response = await axios.get('/elevi2', studentData):
-            response = await axios.get('/elevi', studentData)
+            response = await fetch.get('/elevi2', studentData):
+            response = await fetch.get('/elevi', studentData)
           }
           setStudentsDataSem('');
           setStudentsData(response.data);
@@ -117,8 +116,8 @@ export const AddStudentForm = () => {
       try {
         let response;
           {selectedSem === "2"?
-            response = await axios.get(`/elev2/${searchIDNP}`):
-            response = await axios.get(`/elev/${searchIDNP}`)
+            response = await fetch.get(`/elev2/${searchIDNP}`):
+            response = await fetch.get(`/elev/${searchIDNP}`)
           }
         
         setSearchedStudent(response.data);
@@ -147,8 +146,8 @@ export const AddStudentForm = () => {
       try {
         let response;
           {selectedSem === "2"?
-            response = await axios.get(`/elev2/${IDNP}`):
-            response = await axios.get(`/elev/${IDNP}`)
+            response = await fetch.get(`/elev2/${IDNP}`):
+            response = await fetch.get(`/elev/${IDNP}`)
           }
 
         setFindStudent('');
@@ -193,8 +192,8 @@ export const AddStudentForm = () => {
         const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
         let response;
           {selectedSem === "2"?
-            response = await axios.put(`/modstud2/${IDNP}`, studentData):
-            response = await axios.put(`/modstud/${IDNP}`, studentData)
+            response = await fetch.put(`/modstud2/${IDNP}`, studentData):
+            response = await fetch.put(`/modstud/${IDNP}`, studentData)
           }
         
         console.log(response.data); // Success message from the server
@@ -238,8 +237,8 @@ export const AddStudentForm = () => {
         if(del==='y') { 
           let response;
           {selectedSem === "2"?
-            response = await axios.delete(`/delstud2/${IDNP}`):
-            response = await axios.delete(`/delstud/${IDNP}`)
+            response = await fetch.delete(`/delstud2/${IDNP}`):
+            response = await fetch.delete(`/delstud/${IDNP}`)
           }
         
           alert("Elev is deleted succes");
@@ -268,8 +267,8 @@ export const AddStudentForm = () => {
       try {
         let response;
         {selectedSem === "2"?
-          response = await axios.get(`/getclass2?class=${selectedClass}`):
-          response = await axios.get(`/getclass?class=${selectedClass}`)
+          response = await fetch.get(`/getclass2?class=${selectedClass}`):
+          response = await fetch.get(`/getclass?class=${selectedClass}`)
         }
         
         setStudentsDataSem('');
@@ -290,15 +289,15 @@ export const AddStudentForm = () => {
       try {
         let newmed;
         {selectedSem === "2"?
-          newmed = await axios.get(`/newmed2`):
-          newmed = await axios.get(`/newmed`)
+          newmed = await fetch.get(`/newmed2`):
+          newmed = await fetch.get(`/newmed`)
         }
         console.log(newmed.data); //asg
         
         let response;
         {selectedSem === "2"?
-          response = await axios.get(`/getclassmed2?class=${selectedClasSem}`):
-          response = await axios.get(`/getclassmed?class=${selectedClasSem}`)
+          response = await fetch.get(`/getclassmed2?class=${selectedClasSem}`):
+          response = await fetch.get(`/getclassmed?class=${selectedClasSem}`)
         }
         setStudentsData('');
         setStudentsDataSem(response.data);

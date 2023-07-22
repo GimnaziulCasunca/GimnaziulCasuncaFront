@@ -24,7 +24,7 @@ export const Home = () => {
     const ShowElev = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.get(`/elev/${searchIDNP}`);
+        const response = await fetch.get(`/elev/${searchIDNP}`);
         setSearchedStudent(response.data);
         setSearchError('');
       } catch (error) {

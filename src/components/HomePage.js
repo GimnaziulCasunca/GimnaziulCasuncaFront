@@ -10,13 +10,13 @@ export const HomePage = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isUserExist, setIsUserExist] = useState(null);
+  const [isUserExist, setIsUserExist] = useState(false);
   const [searchError, setSearchError] = useState('');
 
   const LogIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/login', { username, password });
+      const response = await fetch.post('/login', { username, password });
        localStorage.setItem('username',username)
        token = response.data;
        token = token.token
