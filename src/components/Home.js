@@ -8,12 +8,24 @@ export const Home = () => {
     const [searchIDNP, setSearchIDNP] = useState('');
     const [searchedStudent, setSearchedStudent] = useState(null);
     const [searchError, setSearchError] = useState('');
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://servergc.onrender.com/');
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
 
     const ShowElev = async (e) => {
       e.preventDefault();
       try {
         const response = await fetch.get(`/elev/${searchIDNP}`);
-        console.log(response.data);
+        alert(response)
         setSearchedStudent(response.data);
         setSearchError('');
       } catch (error) {
