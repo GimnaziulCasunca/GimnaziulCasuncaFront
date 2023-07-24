@@ -16,7 +16,7 @@ export const HomePage = () => {
   const LogIn = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch.post('/login', { username, password });
+      const response = await axios.post('https://servergc.onrender.com/login', { username, password });
        localStorage.setItem('username',username)
        token = response.data;
        token = token.token

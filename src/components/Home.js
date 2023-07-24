@@ -4,15 +4,23 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 const logo = require('./favicon0.png');
 
+
 export const Home = () => {
     const [searchIDNP, setSearchIDNP] = useState('');
     const [searchedStudent, setSearchedStudent] = useState(null);
     const [searchError, setSearchError] = useState('');
+    const [selectedSem, setSelectedSem] = useState('');
+
 
     const ShowElev = async (e) => {
       e.preventDefault();
       try {
-        let response = await axios.get(`/elev/${searchIDNP}`);
+        let response;
+        {selectedSem === "2"?
+          response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
+          response = await await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
+        }
+        
         setSearchedStudent(response.data);
         setSearchError('');
 
@@ -31,7 +39,11 @@ return (
       <h2>Search Elev:</h2>
       <form onSubmit={ShowElev}>
         <div class="user-box">
-          <label>Search IDNP:</label>
+          <label>Search IDNP: </label> 
+          <select value={selectedSem} onChange={(e) => setSelectedSem(e.target.value)}>
+            <option value="1">Semestrul 1</option>
+            <option value="2">Semestrul 2</option>
+        </select>
             <input type="text" value={searchIDNP} onChange={(e) => setSearchIDNP(e.target.value)} />
         </div>
         <button type="submit" class="btn">Search</button>

@@ -1,11 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 const logo = require('./favicon0.png');
 
-
-
 let FinToken = localStorage.getItem('token'), User = localStorage.getItem('username') ;
-
 
 export const AddStudentForm = () => {
   
@@ -49,8 +47,8 @@ export const AddStudentForm = () => {
           const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional  };
           let response;
           {selectedSem === "2"?
-            response = await fetch.post('/newstud2', studentData):
-            response = await fetch.post('/newstud', studentData)
+            response = await axios.post('https://servergc.onrender.com/newstud2', studentData):
+            response = await axios.post('https://servergc.onrender.com/newstud', studentData)
           }
            
           console.log(response.data); // Success message from the server
@@ -91,8 +89,8 @@ export const AddStudentForm = () => {
           const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
           let response;
           {selectedSem === "2"?
-            response = await fetch.get('/elevi2', studentData):
-            response = await fetch.get('/elevi', studentData)
+            response = await axios.get('https://servergc.onrender.com/elevi2', studentData):
+            response = await axios.get('https://servergc.onrender.com/elevi', studentData)
           }
           setStudentsDataSem('');
           setStudentsData(response.data);
@@ -116,8 +114,8 @@ export const AddStudentForm = () => {
       try {
         let response;
           {selectedSem === "2"?
-            response = await fetch.get(`/elev2/${searchIDNP}`):
-            response = await fetch.get(`/elev/${searchIDNP}`)
+            response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
+            response = await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
           }
         
         setSearchedStudent(response.data);
@@ -146,8 +144,8 @@ export const AddStudentForm = () => {
       try {
         let response;
           {selectedSem === "2"?
-            response = await fetch.get(`/elev2/${IDNP}`):
-            response = await fetch.get(`/elev/${IDNP}`)
+            response = await axios.get(`https://servergc.onrender.com/elev2/${IDNP}`):
+            response = await axios.get(`https://servergc.onrender.com/elev/${IDNP}`)
           }
 
         setFindStudent('');
@@ -192,8 +190,8 @@ export const AddStudentForm = () => {
         const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
         let response;
           {selectedSem === "2"?
-            response = await fetch.put(`/modstud2/${IDNP}`, studentData):
-            response = await fetch.put(`/modstud/${IDNP}`, studentData)
+            response = await axios.put(`https://servergc.onrender.com/modstud2/${IDNP}`, studentData):
+            response = await axios.put(`https://servergc.onrender.com/modstud/${IDNP}`, studentData)
           }
         
         console.log(response.data); // Success message from the server
@@ -237,8 +235,8 @@ export const AddStudentForm = () => {
         if(del==='y') { 
           let response;
           {selectedSem === "2"?
-            response = await fetch.delete(`/delstud2/${IDNP}`):
-            response = await fetch.delete(`/delstud/${IDNP}`)
+            response = await axios.delete(`https://servergc.onrender.com/delstud2/${IDNP}`):
+            response = await axios.delete(`https://servergc.onrender.com/delstud/${IDNP}`)
           }
         
           alert("Elev is deleted succes");
@@ -265,17 +263,20 @@ export const AddStudentForm = () => {
   const getStudentsByClass = async () => {
     if(FinToken){
       try {
-        let response;
+        setStudentsData('');
+        let response = "";
         {selectedSem === "2"?
-          response = await fetch.get(`/getclass2?class=${selectedClass}`):
-          response = await fetch.get(`/getclass?class=${selectedClass}`)
+          response = await axios.get(`https://servergc.onrender.com/getclass2?class=${selectedClass}`):
+          response = await axios.get(`https://servergc.onrender.com/getclass?class=${selectedClass}`)
         }
-        
+        setStudentsData('');
         setStudentsDataSem('');
         setStudentsData(response.data);
         setResponseMessage('');
       } catch (error) {
-        console.error('Error fetching students by class:', error.message);
+        setResponseMessage("Students are not in this class");
+
+        console.error('Error axiosing students by class:', error.message);
       }
     }else 
     {
@@ -287,23 +288,18 @@ export const AddStudentForm = () => {
   const getStudentsByClassMed = async () => {
     if(FinToken){
       try {
-        let newmed;
-        {selectedSem === "2"?
-          newmed = await fetch.get(`/newmed2`):
-          newmed = await fetch.get(`/newmed`)
-        }
-        console.log(newmed.data); //asg
-        
         let response;
+        setStudentsDataSem('')
         {selectedSem === "2"?
-          response = await fetch.get(`/getclassmed2?class=${selectedClasSem}`):
-          response = await fetch.get(`/getclassmed?class=${selectedClasSem}`)
+          response = await axios.get(`https://servergc.onrender.com/getclassmed2?class=${selectedClasSem}`):
+          response = await axios.get(`https://servergc.onrender.com/getclassmed?class=${selectedClasSem}`)
         }
         setStudentsData('');
         setStudentsDataSem(response.data);
         setResponseMessage('');
       } catch (error) {
-        console.error('Error fetching students by class:', error.message);
+        setResponseMessage("Students are not in this class");
+        console.error('Error axiosing students by class:', error.message);
       }
     }else 
     {
@@ -326,6 +322,7 @@ export const AddStudentForm = () => {
     <div>
 
       <img src={logo} class="home" />  
+      <section class = "user">{User}</section>
       <tr class="logout">
         <td >
           <Link to = "/"><button ><h3><b>Home</b></h3></button></Link>
@@ -542,6 +539,7 @@ export const AddStudentForm = () => {
           <p>Istoria: {searchedStudent.Istoria}</p>
           <p>Geografia: {searchedStudent.Geografia}</p>
           <p>Optional: {searchedStudent.Optional}</p>
+          <br/>
         </div>)}
     
       {searchedStudent && searchedStudent.Class === 6 && (
@@ -563,6 +561,7 @@ export const AddStudentForm = () => {
           <p>Istoria: {searchedStudent.Istoria}</p>
           <p>Geografia: {searchedStudent.Geografia}</p> 
           <p>Optional: {searchedStudent.Optional}</p>
+          <br/>
         </div>)}
     
       {searchedStudent && searchedStudent.Class === 5 && (
@@ -584,6 +583,7 @@ export const AddStudentForm = () => {
           <p>Istoria: {searchedStudent.Istoria}</p>
           <p>Geografia: {searchedStudent.Geografia}</p> 
           <p>Optional: {searchedStudent.Optional}</p>
+          <br/>
         </div>)}
 
 
@@ -625,6 +625,7 @@ export const AddStudentForm = () => {
                       )}
                     {/* Biologia: {student.Biologia} <br /> */}
                     Optional: {student.Optional} <br />
+                    <br/>
                   </li>
             ))}
           </ol>
@@ -670,6 +671,7 @@ export const AddStudentForm = () => {
                       )}
                     {/* Biologia: {student.Biologia} <br /> */}
                     Optional: {student.Optional} <br />
+                    <br/>
                   </li>
             ))}
           </ol>
