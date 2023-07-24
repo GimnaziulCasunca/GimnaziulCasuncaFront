@@ -505,9 +505,9 @@ export const AddStudentForm = () => {
         
           <button onClick={getStudentsByClassMed} class = "admn">Get Medie</button>
 
-        {user ? (
+        {User ? (
           <div>
-            {user.username === "DirectorAdmin" ? 
+            {User === "DirectorAdmin" ? 
             <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>Clear Data</b></h3></button></Link></div>:
             console.log("user")}
           </div>
