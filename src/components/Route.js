@@ -321,9 +321,6 @@ export const AddStudentForm = () => {
       }
   };
 
-  
-
-
   return (
 
     <div>
