@@ -15,10 +15,10 @@ export const Home = () => {
     const ShowElev = async (e) => {
       e.preventDefault();
       try {
-        let response;
+        let response = axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`);
         {selectedSem === "2"?
           response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
-          response = await await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
+          response = await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
         }
         
         setSearchedStudent(response.data);
@@ -47,72 +47,48 @@ return (
             <input type="text" value={searchIDNP} onChange={(e) => setSearchIDNP(e.target.value)} />
         </div>
         <button type="submit" class="btn">Search</button>
-        
       </form>
-        {searchError && <p>{searchError}</p>}
-        {searchedStudent && (searchedStudent.Class === 7 ||searchedStudent.Class === 8 ||searchedStudent.Class === 9)  && (
-        <div class="info">
-          <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          {/* <p>Stiinte: {searchedStudent.Stiinte}</p> */}
-          <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p>
-          <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p>
-          <p>Optional: {searchedStudent.Optional}</p>
-        </div>)}
-    
-      {searchedStudent && searchedStudent.Class === 6 && (
-        <div class="info">
-          <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          {/* <p>Stiinte: {searchedStudent.Stiinte}</p> */}
-          <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p>
-          {/* <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>*/}
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p> 
-          <p>Optional: {searchedStudent.Optional}</p>
-        </div>)}
-    
-      {searchedStudent && searchedStudent.Class === 5 && (
-        <div class="info">
-          <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          <p>Stiinte: {searchedStudent.Stiinte}</p> 
-          {/* <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p> */}
-          {/* <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>*/}
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p> 
-          <p>Optional: {searchedStudent.Optional}</p>
-        </div>)}
 
+        {searchError && <p>{searchError}</p>}
+        {searchedStudent && (
+          <div>
+            <h2>Elev Details:</h2>
+          <div class="infof">
+                      IDNP: {searchedStudent.IDNP} <br />
+                      Name: {searchedStudent.Name} <br />
+                      Surname: {searchedStudent.Surname}<br />
+                      Class: {searchedStudent.Class} <br />
+                      Romana: {searchedStudent.Romana} <br />
+                      Eng/Fr: {searchedStudent.Engleza} <br />
+                      Rusa: {searchedStudent.Rusa} <br />
+                      Matematica: {searchedStudent.Mate} <br />
+                      Istoria: {searchedStudent.Istoria} <br />
+                      Geografia: {searchedStudent.Geografia} <br />
+                        {(searchedStudent.Class === 7 || searchedStudent.Class === 8 || searchedStudent.Class === 9) && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Info: {searchedStudent.Info} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 6 && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 5 && (
+                          <React.Fragment>
+                          Stiinte: {searchedStudent.Stiinte} <br />
+                          </React.Fragment>
+                        )}
+                      {/* Biologia: {searchedStudent.Biologia} <br /> */}
+                      Optional: {searchedStudent.Optional} <br />
+                      <br/>
+            <br/>
+            </div>
+          </div>)}
      </div>
          
 </div>   

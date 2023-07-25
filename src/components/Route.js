@@ -97,7 +97,7 @@ export const AddStudentForm = () => {
           setResponseMessage('');
         }
         catch (error) {
-        console.error('Error creating elev:', error.message);
+        console.error('Error get med elev:', error.message);
       }
     }else 
       {
@@ -117,7 +117,6 @@ export const AddStudentForm = () => {
             response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
             response = await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
           }
-        
         setSearchedStudent(response.data);
         setSearchError('');
       } catch (error) {
@@ -288,18 +287,24 @@ export const AddStudentForm = () => {
   const getStudentsByClassMed = async () => {
     if(FinToken){
       try {
-        let response;
         setStudentsDataSem('')
-        {selectedSem === "2"?
-          response = await axios.get(`https://servergc.onrender.com/getclassmed2?class=${selectedClasSem}`):
+        setStudentsData('');
+        let response = '';
+        let newmed = '';
+
+        if (selectedSem === "2") {
+          newmed = await axios.get(`https://servergc.onrender.com/newmed2`)
+          response = await axios.get(`https://servergc.onrender.com/getclassmed2?class=${selectedClasSem}`)
+        } else {
+          newmed = await axios.get(`https://servergc.onrender.com/newmed`)
           response = await axios.get(`https://servergc.onrender.com/getclassmed?class=${selectedClasSem}`)
         }
-        setStudentsData('');
+
+        console.log(newmed.data); 
         setStudentsDataSem(response.data);
         setResponseMessage('');
       } catch (error) {
         setResponseMessage("Students are not in this class");
-        console.error('Error axiosing students by class:', error.message);
       }
     }else 
     {
@@ -519,75 +524,46 @@ export const AddStudentForm = () => {
       </div>
     </div>
 
-    {searchError && <p>{searchError}</p>}
-      {searchedStudent && (searchedStudent.Class === 7 ||searchedStudent.Class === 8 ||searchedStudent.Class === 9)  && (
+    {searchError && <p class = "elevdet">{searchError}</p>}
+      {searchedStudent && (
         <div class="elevdet">
           <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          {/* <p>Stiinte: {searchedStudent.Stiinte}</p> */}
-          <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p>
-          <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p>
-          <p>Optional: {searchedStudent.Optional}</p>
-          <br/>
-        </div>)}
-    
-      {searchedStudent && searchedStudent.Class === 6 && (
-        <div class="elevdet">
-          <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          {/* <p>Stiinte: {searchedStudent.Stiinte}</p> */}
-          <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p>
-          {/* <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>*/}
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p> 
-          <p>Optional: {searchedStudent.Optional}</p>
-          <br/>
-        </div>)}
-    
-      {searchedStudent && searchedStudent.Class === 5 && (
-        <div class="elevdet">
-          <h2>Elev Details:</h2>
-          <p>IDNP: {searchedStudent.IDNP}</p>
-          <p>Name: {searchedStudent.Name}</p>
-          <p>Surname: {searchedStudent.Surname}</p>
-          <p>Class: {searchedStudent.Class}</p>
-          <p>Limba și literatura română: {searchedStudent.Romana}</p>
-          <p>Eng/Fr: {searchedStudent.Engleza}</p>
-          <p>Rusa: {searchedStudent.Rusa}</p>
-          <p>Matematica: {searchedStudent.Mate}</p>
-          <p>Stiinte: {searchedStudent.Stiinte}</p> 
-          {/* <p>Biologia: {searchedStudent.Biologia}</p>
-          <p>Fizica: {searchedStudent.Fizica}</p> */}
-          {/* <p>Chimia: {searchedStudent.Chimia}</p>
-          <p>Informatica: {searchedStudent.Info}</p>*/}
-          <p>Istoria: {searchedStudent.Istoria}</p>
-          <p>Geografia: {searchedStudent.Geografia}</p> 
-          <p>Optional: {searchedStudent.Optional}</p>
+                    IDNP: {searchedStudent.IDNP} <br />
+                    Name: {searchedStudent.Name} <br />
+                    Surname: {searchedStudent.Surname}<br />
+                    Class: {searchedStudent.Class} <br />
+                    Romana: {searchedStudent.Romana} <br />
+                    Eng/Fr: {searchedStudent.Engleza} <br />
+                    Rusa: {searchedStudent.Rusa} <br />
+                    Matematica: {searchedStudent.Mate} <br />
+                    Istoria: {searchedStudent.Istoria} <br />
+                    Geografia: {searchedStudent.Geografia} <br />
+                      {(searchedStudent.Class === 7 || searchedStudent.Class === 8 || searchedStudent.Class === 9) && (
+                        <React.Fragment>
+                          Biologia: {searchedStudent.Biologia} <br />
+                          Fizica: {searchedStudent.Fizica} <br />
+                          Chimia: {searchedStudent.Chimia} <br />
+                          Info: {searchedStudent.Info} <br />
+                        </React.Fragment>
+                      )}
+                      {searchedStudent.Class === 6 && (
+                        <React.Fragment>
+                          Biologia: {searchedStudent.Biologia} <br />
+                          Fizica: {searchedStudent.Fizica} <br />
+                        </React.Fragment>
+                      )}
+                      {searchedStudent.Class === 5 && (
+                        <React.Fragment>
+                         Stiinte: {searchedStudent.Stiinte} <br />
+                        </React.Fragment>
+                      )}
+                    {/* Biologia: {searchedStudent.Biologia} <br /> */}
+                    Optional: {searchedStudent.Optional} <br />
+                    <br/>
           <br/>
         </div>)}
 
-
-      <p>  {responseMessage}</p>
+      <p class = "info">  {responseMessage}</p>
       { studentsData.length > 0 && (
         <div class="search">
           <h2>Elevi notes:</h2>
@@ -633,7 +609,6 @@ export const AddStudentForm = () => {
       )}
      
 
-      <p>  {responseMessage}</p>
       {studentsDataSem.length > 0 && (
         <div class="search">
           <h2>Elevi Medie:</h2>

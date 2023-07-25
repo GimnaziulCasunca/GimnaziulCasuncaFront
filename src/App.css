@@ -194,3 +194,13 @@ body{
 .modify,.search,.info{
   color: white;
 }
+
+.infof{
+  color: white;
+  font-size: 20px;
+  font-family: 'georgia';
+  margin-left: 5%;
+  white-space: 15px;
+  line-height: 1.5;
+  
+}
