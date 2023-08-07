@@ -139,6 +139,26 @@ body{
   position: relative;
 }
 
+.qrwidth{
+  width: 500px;
+  height: 500px;
+}
+
+.qr{
+  position: absolute;
+  left: 67%;
+  top: 3%;
+  text-align: center;
+}
+
+@media (max-width: 550px) {
+  .qr {
+    position: static;
+    left: 0px;
+  }
+}
+
+
 .clr{
  background: none;
  border: none;

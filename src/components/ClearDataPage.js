@@ -1,4 +1,3 @@
-// AboutPage.js
 import React from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
@@ -7,7 +6,7 @@ import {Link} from 'react-router-dom';
 let del, pass, FinToken = localStorage.getItem('token')
 
 
-export const AboutPage = () => {
+export const ClearDataPage = () => {
 
   
   const handleClearDatabase = async () => {
@@ -42,4 +41,4 @@ export const AboutPage = () => {
     </div>
   )}
 
-export default AboutPage;
+export default ClearDataPage;

@@ -5,9 +5,8 @@ const logo = require('./favicon0.png');
 
 let FinToken = localStorage.getItem('token'), User = localStorage.getItem('username') ;
 
-export const AddStudentForm = () => {
+export const SubmitPage = () => {
   
-  const [user, setUser] = useState(null);
   const username = User; // Provide the desired username here
 
   const [IDNP, setIdnp] = React.useState('');
@@ -658,4 +657,4 @@ export const AddStudentForm = () => {
   );
 };
 
-export default AddStudentForm;
+export default SubmitPage;

@@ -13,6 +13,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
+    "react-svg": "^16.1.19",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,7 +46,8 @@
     "node": ">=15 <17"
   },
   "devDependencies": {
+    "file-loader": "^6.2.0",
     "gh-pages": "^5.0.0"
   },
-  "proxy":"https://servergc.onrender.com/"
+  "proxy": "https://servergc.onrender.com/"
 }

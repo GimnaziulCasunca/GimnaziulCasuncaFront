@@ -1,12 +1,11 @@
 import "./App.css"
 import React, { useState, useEffect} from 'react';
-import axios from 'axios';
 import {Helmet} from "react-helmet"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Home} from './components/Home'
 import {HomePage} from './components/HomePage'
-import {AboutPage} from './components/About'
-import {AddStudentForm} from './components/Route'
+import {LoginPage} from './components/LoginPage'
+import {ClearDataPage} from './components/ClearDataPage'
+import {SubmitPage} from './components/SubmitPage'
 
 export const App = () => {
   return(
@@ -19,10 +18,10 @@ export const App = () => {
     </Helmet>
     <Router>
       <Routes>
-        <Route path="/" element = {<Home/>} />
-        <Route path="/login" element = {<HomePage/>} />
-        <Route path="/about" element = {<AboutPage/>} />
-        <Route path="/modify" element = {<AddStudentForm/>} />
+        <Route path="/" element = {<HomePage/>} />
+        <Route path="/login" element = {<LoginPage/>} />
+        <Route path="/about" element = {<ClearDataPage/>} />
+        <Route path="/modify" element = {<SubmitPage/>} />
       </Routes>
     </Router>
     </div>
