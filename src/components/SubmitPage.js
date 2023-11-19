@@ -512,7 +512,7 @@ export const SubmitPage = () => {
         {User ? (
           <div>
             {User === "DirectorAdmin" ? 
-            <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>Clear Data</b></h3></button></Link></div>:
+            <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>Next Year</b></h3></button></Link></div>:
             console.log("user")}
           </div>
         ) : (
