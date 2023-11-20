@@ -2,10 +2,10 @@
 
 const config = {
     development: {
-      apiUrl: 'http://localhost:3000', // Replace with your local backend URL
+      apiUrl: 'http://localhost:3001', // Replace with your local backend URL
     },
     production: {
-      apiUrl: 'https://band-fuyo.onrender.com', // Replace with your production backend URL
+      apiUrl: 'https://servergc.onrender.com/', // Replace with your production backend URL
     },
   };
   

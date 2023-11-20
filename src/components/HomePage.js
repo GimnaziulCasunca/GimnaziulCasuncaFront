@@ -55,10 +55,10 @@ return (
     <Link to = "/login" class="logout"><button><h3><b>Log In</b></h3></button></Link>
     <br/>
      <div class = "login-box">
-      <h2>Search Elev:</h2>
+      <h2>Search Elev by IDNP:</h2>
       <form onSubmit={ShowElev}>
         <div class="user-box">
-          <label>Search IDNP: </label> 
+          <label>Select sem: </label> 
           <select value={selectedSem} onChange={(e) => setSelectedSem(e.target.value)}>
             <option value="1">Semestrul 1</option>
             <option value="2">Semestrul 2</option>

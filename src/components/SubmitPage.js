@@ -512,7 +512,7 @@ export const SubmitPage = () => {
         {User ? (
           <div>
             {User === "DirectorAdmin" ? 
-            <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>Clear Data</b></h3></button></Link></div>:
+            <div>Mută elevii in alta clasa<Link to = "/about" ><button class="clr"><h3><b>Next Year</b></h3></button></Link></div>:
             console.log("user")}
           </div>
         ) : (
@@ -571,7 +571,7 @@ export const SubmitPage = () => {
                   <li key={index}>
                     IDNP: {student.IDNP} <br />
                     Name: {student.Name} <br />
-                    Surname: {student.Surname}<br />
+                    Surname: {student.Surname}<br /> 
                     Class: {student.Class} <br />
                     Romana: {student.Romana} <br />
                     Eng/Fr: {student.Engleza} <br />

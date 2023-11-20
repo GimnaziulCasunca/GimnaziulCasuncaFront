@@ -12,15 +12,14 @@ export const ClearDataPage = () => {
   const handleClearDatabase = async () => {
   if(FinToken){
     try {
-      del = prompt("Are you sure you want to clear all data? (y,n)?");
+      del = prompt("Esti sigura? Alege (y/n)?");
       if (del === "y") {
-        pass = prompt("Enter password ?");
+        pass = prompt("Introdu parola ?");
           if (pass === "42281719") {
-            await axios.delete("/cleardata");
-            alert("Elev database cleared successfully.");
-    
+            await axios.patch(`https://servergc.onrender.com/cleardata`);
+            alert("Elevii au fost mutați. Note nu sunt!");
           }else {
-            alert("Wrong password!")
+            alert("Parola gresită!")
           }
       } 
     } catch (error) {
@@ -33,8 +32,9 @@ export const ClearDataPage = () => {
         <Link to = "/modify"><button class="home"><h3><b>Back</b></h3></button></Link> 
         <div class="container">
             <div class="center">
-              <div class="center-align">Be careful, you will delete the database:<br/>
-                <button class="cleardata"  onClick={handleClearDatabase}>Clear Database </button>
+              <div class="center-align">Atenție!!!. Elevii se vor transfera cu o clasa mai mare:<br/>
+              Notele se vor sterge!!!<br/><br/>
+                <button class="cleardata"  onClick={handleClearDatabase}>Executa modificări </button>
               </div>
             </div>
         </div>

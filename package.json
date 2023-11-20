@@ -49,5 +49,6 @@
     "file-loader": "^6.2.0",
     "gh-pages": "^5.0.0"
   },
-  "proxy": "https://servergc.onrender.com/"
+  "proxy": "https://servergc.onrender.com/" 
+
 }
