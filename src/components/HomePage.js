@@ -21,10 +21,10 @@ export const HomePage = () => {
         setSearchedStudent('');
         setSearchError('');
         setLoading(true);
-        let response = axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`);
+        let response = axios.get(`/elev/${searchIDNP}`);
         {selectedSem === "2"?
-          response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
-          response = await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
+          response = await axios.get(`/elev2/${searchIDNP}`):
+          response = await axios.get(`/elev/${searchIDNP}`)
         }
         setSearchedStudent(response.data);
         setLoading('');
