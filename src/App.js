@@ -7,13 +7,14 @@ import {LoginPage} from './components/LoginPage'
 import {ClearDataPage} from './components/ClearDataPage'
 import {SubmitPage} from './components/SubmitPage'
 
+// Check if the login-box element is not null
 export const App = () => {
   return(
     <div>
     <Helmet>
       <meta charSet="utf-8"/>
       <title> Gimnaziul Casunca </title>
-      <link rel="canonical" href="http://mysite.com/example"/>
+      <link rel="canonical" href="https://gimnaziucasunca.web.app/"/>
       <meta name="description" content="Gimnaziul Casunca"/>
     </Helmet>
     <Router>

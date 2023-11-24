@@ -20,6 +20,11 @@ export const SubmitPage = () => {
   const [Geografia, setGeografia] = React.useState('');
   const [Chimia, setChimia] = React.useState('');
   const [Fizica, setFizica] = React.useState('');
+  const [Tehnologica, setTehnologica] = React.useState('');
+  const [Muzica, setMuzica] = React.useState('');
+  const [Plastica, setPlastica] = React.useState('');
+  const [MSV, setMSV] = React.useState('');
+  const [EdFizica, setEdFizica] = React.useState('');
   const [Stiinte, setStiinte] = React.useState('');
   const [Engleza, setEngleza] = React.useState('');
   const [Biologia, setBiologia] = React.useState('');
@@ -35,7 +40,7 @@ export const SubmitPage = () => {
   const [selectedClass, setSelectedClass] = useState('');
   const [selectedClasSem, setSelectedClasSem] = useState('');
   const [selectedSem, setSelectedSem] = useState('');
-  // let Obiecte = {Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Ed_Fiz, Stiinte, Engleza, Biologia, Rusa}
+  // let Obiecte = {Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, EdFizica, Stiinte, Engleza, Biologia, Rusa}
   let message = "";
     // adaugarea unui nou elev
     const AddStudent = async (e) => {
@@ -43,7 +48,7 @@ export const SubmitPage = () => {
       if(FinToken){
         try {
           message = "";
-          const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional  };
+          const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Tehnologica, Muzica, Plastica, MSV, EdFizica, Stiinte, Engleza, Biologia, Rusa, Optional  };
           let response;
           {selectedSem === "2"?
             response = await axios.post('https://servergc.onrender.com/newstud2', studentData):
@@ -62,6 +67,11 @@ export const SubmitPage = () => {
           setGeografia('');
           setChimia('');
           setFizica('');
+          setTehnologica('');
+          setMuzica('');
+          setPlastica('');
+          setMSV('');
+          setEdFizica('');
           setStiinte('');
           setEngleza('');
           setBiologia('');
@@ -75,7 +85,7 @@ export const SubmitPage = () => {
           }
       }else 
         {
-          message = "Please login";
+          message = "Te rog Logează-te";
           alert(message);
         }
     };
@@ -85,7 +95,7 @@ export const SubmitPage = () => {
     e.preventDefault();
     if(FinToken){
       try {
-          const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
+          const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Tehnologica, Muzica, Plastica, MSV, EdFizica, Stiinte, Engleza, Biologia, Rusa, Optional };
           let response;
           {selectedSem === "2"?
             response = await axios.get('https://servergc.onrender.com/elevi2', studentData):
@@ -100,7 +110,7 @@ export const SubmitPage = () => {
       }
     }else 
       {
-        message = "Please login";
+        message = "Te rog Logează-te";
         alert(message);
       }
   };
@@ -120,7 +130,7 @@ export const SubmitPage = () => {
         setSearchError('');
       } catch (error) {
           if (error.response && error.response.status === 404) {
-            setSearchError('Student not found');
+            setSearchError('Elevul nu a fost găsit');
           } else {
             setSearchError('Server error');
           }
@@ -129,7 +139,7 @@ export const SubmitPage = () => {
     }
     else 
       {
-        message = "Please login";
+        message = "Te rog Logează-te";
         alert(message);
       }
   };
@@ -157,6 +167,11 @@ export const SubmitPage = () => {
         setGeografia(response.data.Geografia);
         setChimia(response.data.Chimia);
         setFizica(response.data.Fizica);
+        setTehnologica(response.data.Tehnologica);
+        setMuzica(response.data.Muzica);
+        setPlastica(response.data.Plastica);
+        setMSV(response.data.MSV);
+        setEdFizica(response.data.EdFizica);
         setStiinte(response.data.Stiinte);
         setEngleza(response.data.Engleza);
         setBiologia(response.data.Biologia);
@@ -174,7 +189,7 @@ export const SubmitPage = () => {
     }
     else 
       {
-        message = "Please login";
+        message = "Te rog Logează-te";
         alert(message);
       }
   };
@@ -185,7 +200,7 @@ export const SubmitPage = () => {
     if(FinToken){
       try {
         message = "";
-        const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Stiinte, Engleza, Biologia, Rusa, Optional };
+        const studentData = { IDNP, Name, Surname, Class, Romana, Mate, Info, Istoria, Geografia, Chimia, Fizica, Tehnologica, Muzica, Plastica, MSV, EdFizica, Stiinte, Engleza, Biologia, Rusa, Optional };
         let response;
           {selectedSem === "2"?
             response = await axios.put(`https://servergc.onrender.com/modstud2/${IDNP}`, studentData):
@@ -204,20 +219,25 @@ export const SubmitPage = () => {
         setGeografia('');
         setChimia('');
         setFizica('');
+        setTehnologica('');
+        setMuzica('');
+        setPlastica('');
+        setMSV('');
+        setEdFizica('');
         setStiinte('');
         setEngleza('');
         setBiologia('');
         setRusa('');
         setOptional('');
-        message = "Student successfully modify.";
+        message = "Elevul a fost modificat!";
         alert(message);
       } catch (error) {
-        message = "There was a problem modify the elev.";
+        message = "Problema cu modificarea.";
         alert(message);
       }
     }else 
     {
-      message = "Please login";
+      message = "Te rog Logează-te";
       alert(message);
     }
 
@@ -229,7 +249,7 @@ export const SubmitPage = () => {
     e.preventDefault();
     if(FinToken){
       try {
-        del = prompt("Are you sure you want to delete the elev (y,n)?");
+        del = prompt("Ești sigur ca doresti sa ștergi elevul (y,n)?");
         if(del==='y') { 
           let response;
           {selectedSem === "2"?
@@ -239,19 +259,19 @@ export const SubmitPage = () => {
         
           alert("Elev is deleted succes");
           console.log(response.data); // Success message from the server
-          setResponseMessage('Student deleted successfully.'); // Update the response message
+          setResponseMessage('Elevul a fost șters!'); // Update the response message
         }
         else{
-          alert("Student wasn't deleted");
+          alert("Elevul nu a fost șters");
         }
       } catch (error) {
         alert("Eror");
-        console.error('Error deleting student:', error.message);
-        setResponseMessage('There was a problem deleting the student.'); // Update the response message
+        console.error('A Aparut o eroare:', error.message);
+        setResponseMessage('A Aparut o eroare.'); // Update the response message
       }
     }else 
     {
-      message = "Please login";
+      message = "Te rog Logează-te";
       alert(message);
     }
 
@@ -272,13 +292,13 @@ export const SubmitPage = () => {
         setStudentsData(response.data);
         setResponseMessage('');
       } catch (error) {
-        setResponseMessage("Students are not in this class");
+        setResponseMessage("Nu sunt elevi in clasa dată");
 
-        console.error('Error axiosing students by class:', error.message);
+        console.error('Eroare:', error.message);
       }
     }else 
     {
-      message = "Please login";
+      message = "Te rog Logează-te";
       alert(message);
     }
   };
@@ -307,7 +327,7 @@ export const SubmitPage = () => {
       }
     }else 
     {
-      message = "Please login";
+      message = "Te rog Logează-te";
       alert(message);
     }
   };
@@ -337,9 +357,8 @@ export const SubmitPage = () => {
       </tr>
       
 
-    <div class = "login-box">
+    <div class = "login-box edit" >
       <form class="modify">
-      
       <h2>Select Sem: 
       <select value={selectedSem} onChange={(e) => setSelectedSem(e.target.value)}>
           <option value="1">Semestrul 1</option>
@@ -353,26 +372,25 @@ export const SubmitPage = () => {
          <td> <input type="text" class="adds" value={IDNP} onChange={(e) => setIdnp(e.target.value)} /></td>
         </tr>
 
-        <td colSpan={2}><button onClick={FindElev} class = "admn">Find</button>
-        <button onClick={DelElev} class = "admn">Delete</button></td>
+        <td colSpan={2}>Caută p/u a modifica <button onClick={FindElev} class = "admn">Caută</button><button onClick={DelElev} class = "admn">Șterge</button></td>
 
         <tr>
-          <td> Name:</td>
+          <td> Nume:</td>
           <td> <input type="text" class="add" value={Name} onChange={(e) => setName(e.target.value)} /></td>
         </tr>
 
         <tr>
-          <td>Surname:</td>
+          <td>Prenume:</td>
           <td><input type="text" class="add" value={Surname} onChange={(e) => setSurname(e.target.value)} /></td>
         </tr>
 
         <tr>
-        <td>Class:</td>
+        <td>Clasa:</td>
         <td> <input type="text" value={Class} onChange={(e) => setClass(e.target.value)} /></td>
         </tr>
 
         <tr>
-        <td> Romana:</td>
+        <td> Limba Romană:</td>
         <td> <input type="text" value={Romana} onChange={(e) => setRomana(e.target.value)} /></td>
         </tr>
 
@@ -382,7 +400,7 @@ export const SubmitPage = () => {
         </tr>
         
         <tr>
-        <td> Info:</td>
+        <td> Informatica:</td>
         <td><input type="text" value={Info} onChange={(e) => setInfo(e.target.value)} /></td>
         </tr>
         
@@ -405,6 +423,31 @@ export const SubmitPage = () => {
         <td>Fizica:</td>
         <td><input type="text" value={Fizica} onChange={(e) => setFizica(e.target.value)} /></td>
         </tr>
+
+        <tr>
+        <td>Tehnologica:</td>
+        <td><input type="text" value={Tehnologica} onChange={(e) => setTehnologica(e.target.value)} /></td>
+        </tr>
+
+        <tr>
+        <td>Muzica:</td>
+        <td><input type="text" value={Muzica} onChange={(e) => setMuzica(e.target.value)} /></td>
+        </tr>
+
+        <tr>
+        <td>Plastica:</td>
+        <td><input type="text" value={Plastica} onChange={(e) => setPlastica(e.target.value)} /></td>
+        </tr>
+
+        <tr>
+        <td>Ed p/u Soc:</td>
+        <td><input type="text" value={MSV} onChange={(e) => setMSV(e.target.value)} /></td>
+        </tr>
+
+        <tr>
+        <td>Ed Fizica:</td>
+        <td><input type="text" value={EdFizica} onChange={(e) => setEdFizica(e.target.value)} /></td>
+        </tr>
         
         <tr>
         <td>Știinte:</td>
@@ -412,7 +455,7 @@ export const SubmitPage = () => {
         </tr>
 
         <tr>
-        <td>Engleza:</td>
+        <td>Engl/Fr:</td>
         <td><input type="text" value={Engleza} onChange={(e) => setEngleza(e.target.value)} /></td>
         </tr>
 
@@ -425,18 +468,13 @@ export const SubmitPage = () => {
         <td>Rusa:</td>
         <td><input type="text" value={Rusa} onChange={(e) => setRusa(e.target.value)} /></td>
         </tr>
-        
-        <tr>
-        <td>Opțional:</td>
-        <td><input type="text" value={Optional} onChange={(e) => setOptional(e.target.value)} /></td>
-        </tr>
 
       </form>
-        <button onClick={ShowElevi} class = "admn">Show All</button>
-        <button onClick={ModifyElev} class = "admn">Modify</button>
-        <button onClick={AddStudent} class = "admn">Add Elev</button><br />
+        <button onClick={ShowElevi} class = "admn">Toti Elevii</button>
+        <button onClick={ModifyElev} class = "admn">Modifică</button>
+        <button onClick={AddStudent} class = "admn">Adaugă Elev</button><br />
 
-      <h2>Search Elev:</h2>
+      <h2>Caută Elev:</h2>
       <form onSubmit={ShowElev} class = "search">
         <label>
           By IDNP:
@@ -458,6 +496,11 @@ export const SubmitPage = () => {
         setGeografia(findStudent.Geografia),
         setChimia(findStudent.Chimia),
         setFizica(findStudent.Fizica),
+        setTehnologica(findStudent.Tehnologica),
+        setMuzica(findStudent.Muzica),
+        setPlastica(findStudent.Plastica),
+        setMSV(findStudent.MSV),
+        setEdFizica(findStudent.EdFizica),
         setStiinte(findStudent.Stiinte),
         setEngleza(findStudent.Engleza),
         setBiologia(findStudent.Biologia),
@@ -469,9 +512,9 @@ export const SubmitPage = () => {
 
       <div>
        <label class = "search">
-        Select Class: 
+        Selectează Clasa: 
         <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
-          <option value="">All</option>
+          <option value="">Toți</option>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -483,18 +526,18 @@ export const SubmitPage = () => {
           <option value="8">8</option>
           <option value="9">9</option>
         </select>
-          <button onClick={getStudentsByClass} class = "admn">Get Students</button>
+          <button onClick={getStudentsByClass} class = "admn">Afișează elevii</button>
       </label>
       <ul>
       </ul>
      </div>
 
     <div>
-     <h2>Get Medie:</h2>
+     <h2>Afișează mediile:</h2>
      <label class = "search">
-        Select Class:  
+     Selectează Clasa:  
         <select value={selectedClasSem} onChange={(e) => setSelectedClasSem(e.target.value)}>
-        <option value="">All</option>
+        <option value="">Toți</option>
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -507,12 +550,12 @@ export const SubmitPage = () => {
           <option value="9">9</option>
         </select> 
         
-          <button onClick={getStudentsByClassMed} class = "admn">Get Medie</button>
+          <button onClick={getStudentsByClassMed} class = "admn">Afișează Medie</button>
 
         {User ? (
           <div>
             {User === "DirectorAdmin" ? 
-            <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>Next Year</b></h3></button></Link></div>:
+            <div>Doar la inceputul unui an nou <Link to = "/about" ><button class="clr"><h3><b>An nou</b></h3></button></Link></div>:
             console.log("user")}
           </div>
         ) : (
@@ -527,37 +570,69 @@ export const SubmitPage = () => {
       {searchedStudent && (
         <div class="elevdet">
           <h2>Elev Details:</h2>
-                    IDNP: {searchedStudent.IDNP} <br />
-                    Name: {searchedStudent.Name} <br />
-                    Surname: {searchedStudent.Surname}<br />
-                    Class: {searchedStudent.Class} <br />
-                    Romana: {searchedStudent.Romana} <br />
-                    Eng/Fr: {searchedStudent.Engleza} <br />
-                    Rusa: {searchedStudent.Rusa} <br />
-                    Matematica: {searchedStudent.Mate} <br />
-                    Istoria: {searchedStudent.Istoria} <br />
-                    Geografia: {searchedStudent.Geografia} <br />
-                      {(searchedStudent.Class === 7 || searchedStudent.Class === 8 || searchedStudent.Class === 9) && (
-                        <React.Fragment>
-                          Biologia: {searchedStudent.Biologia} <br />
-                          Fizica: {searchedStudent.Fizica} <br />
-                          Chimia: {searchedStudent.Chimia} <br />
-                          Info: {searchedStudent.Info} <br />
-                        </React.Fragment>
-                      )}
-                      {searchedStudent.Class === 6 && (
-                        <React.Fragment>
-                          Biologia: {searchedStudent.Biologia} <br />
-                          Fizica: {searchedStudent.Fizica} <br />
-                        </React.Fragment>
-                      )}
-                      {searchedStudent.Class === 5 && (
-                        <React.Fragment>
-                         Stiinte: {searchedStudent.Stiinte} <br />
-                        </React.Fragment>
-                      )}
-                    {/* Biologia: {searchedStudent.Biologia} <br /> */}
-                    Optional: {searchedStudent.Optional} <br />
+                      IDNP: {searchedStudent.IDNP} <br />
+                      Nume: {searchedStudent.Name} <br />
+                      Prenume: {searchedStudent.Surname}<br />
+                      Clasa: {searchedStudent.Class} <br />
+                      Limba Romana: {searchedStudent.Romana} <br />
+                      Engleza/Franceza: {searchedStudent.Engleza} <br />
+                      Limba Rusa: {searchedStudent.Rusa} <br />
+                      Matematica: {searchedStudent.Mate} <br />
+                      Istoria: {searchedStudent.Istoria} <br />
+                      Geografia: {searchedStudent.Geografia} <br />
+                      Ed. p/u Soc: {searchedStudent.Geografia} <br />
+                        {searchedStudent.Class === 5 && (
+                          <React.Fragment>
+                          Ed. Muzicală: {searchedStudent.Muzica} <br />
+                          Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                          Ed. Plastică: {searchedStudent.Plastica} <br />
+                          Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          Știinta: {searchedStudent.Stiinte} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 6 && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Plastică: {searchedStudent.Plastica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 7 && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Plastică: {searchedStudent.Plastica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 8  && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 9 && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
                     <br/>
           <br/>
         </div>)}
@@ -569,37 +644,69 @@ export const SubmitPage = () => {
           <ol>
                 {studentsData.map((student, index) => (
                   <li key={index}>
-                    IDNP: {student.IDNP} <br />
-                    Name: {student.Name} <br />
-                    Surname: {student.Surname}<br /> 
-                    Class: {student.Class} <br />
-                    Romana: {student.Romana} <br />
-                    Eng/Fr: {student.Engleza} <br />
-                    Rusa: {student.Rusa} <br />
-                    Matematica: {student.Mate} <br />
-                    Istoria: {student.Istoria} <br />
-                    Geografia: {student.Geografia} <br />
-                      {(student.Class === 7 || student.Class === 8 || student.Class === 9) && (
-                        <React.Fragment>
-                          Biologia: {student.Biologia} <br />
-                          Fizica: {student.Fizica} <br />
-                          Chimia: {student.Chimia} <br />
-                          Info: {student.Info} <br />
-                        </React.Fragment>
-                      )}
-                      {student.Class === 6 && (
-                        <React.Fragment>
-                          Biologia: {student.Biologia} <br />
-                          Fizica: {student.Fizica} <br />
-                        </React.Fragment>
-                      )}
-                      {student.Class === 5 && (
-                        <React.Fragment>
-                         Stiinte: {student.Stiinte} <br />
-                        </React.Fragment>
-                      )}
-                    {/* Biologia: {student.Biologia} <br /> */}
-                    Optional: {student.Optional} <br />
+                      IDNP: {student.IDNP} <br />
+                      Nume: {student.Name} <br />
+                      Prenume: {student.Surname}<br />
+                      Clasa: {student.Class} <br />
+                      Limba Romana: {student.Romana} <br />
+                      Engleza/Franceza: {student.Engleza} <br />
+                      Limba Rusa: {student.Rusa} <br />
+                      Matematica: {student.Mate} <br />
+                      Istoria: {student.Istoria} <br />
+                      Geografia: {student.Geografia} <br />
+                      Ed. p/u Soc: {student.Geografia} <br />
+                        {student.Class === 5 && (
+                          <React.Fragment>
+                          Ed. Muzicală: {student.Muzica} <br />
+                          Ed. Tehnologică: {student.Tehnologica} <br />
+                          Ed. Plastică: {student.Plastica} <br />
+                          Ed. Fizică: {student.EdFizica} <br />
+                          Știinta: {student.Stiinte} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 6 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Plastică: {student.Plastica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 7 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Plastică: {student.Plastica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 8  && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 9 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
                     <br/>
                   </li>
             ))}
@@ -614,37 +721,69 @@ export const SubmitPage = () => {
           <ol>
           {studentsDataSem.map((student, index) => (
                   <li key={index}>
-                    IDNP: {student.IDNP} <br />
-                    Name: {student.Name} <br />
-                    Surname: {student.Surname}<br />
-                    Class: {student.Class} <br />
-                    Romana: {student.Romana} <br />
-                    Eng/Fr: {student.Engleza} <br />
-                    Rusa: {student.Rusa} <br />
-                    Matematica: {student.Mate} <br />
-                    Istoria: {student.Istoria} <br />
-                    Geografia: {student.Geografia} <br />
-                      {(student.Class === 7 || student.Class === 8 || student.Class === 9) && (
-                        <React.Fragment>
-                          Biologia: {student.Biologia} <br />
-                          Fizica: {student.Fizica} <br />
-                          Chimia: {student.Chimia} <br />
-                          Info: {student.Info} <br />
-                        </React.Fragment>
-                      )}
-                      {student.Class === 6 && (
-                        <React.Fragment>
-                          Biologia: {student.Biologia} <br />
-                          Fizica: {student.Fizica} <br />
-                        </React.Fragment>
-                      )}
-                      {student.Class === 5 && (
-                        <React.Fragment>
-                         Stiinte: {student.Stiinte} <br />
-                        </React.Fragment>
-                      )}
-                    {/* Biologia: {student.Biologia} <br /> */}
-                    Optional: {student.Optional} <br />
+                      IDNP: {student.IDNP} <br />
+                      Nume: {student.Name} <br />
+                      Prenume: {student.Surname}<br />
+                      Clasa: {student.Class} <br />
+                      Limba Romana: {student.Romana} <br />
+                      Engleza/Franceza: {student.Engleza} <br />
+                      Limba Rusa: {student.Rusa} <br />
+                      Matematica: {student.Mate} <br />
+                      Istoria: {student.Istoria} <br />
+                      Geografia: {student.Geografia} <br />
+                      Ed. p/u Soc: {student.Geografia} <br />
+                        {student.Class === 5 && (
+                          <React.Fragment>
+                          Ed. Muzicală: {student.Muzica} <br />
+                          Ed. Tehnologică: {student.Tehnologica} <br />
+                          Ed. Plastică: {student.Plastica} <br />
+                          Ed. Fizică: {student.EdFizica} <br />
+                          Știinta: {student.Stiinte} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 6 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Plastică: {student.Plastica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 7 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Plastică: {student.Plastica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 8  && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Muzicală: {student.Muzica} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {student.Class === 9 && (
+                          <React.Fragment>
+                            Biologia: {student.Biologia} <br />
+                            Fizica: {student.Fizica} <br />
+                            Chimia: {student.Chimia} <br />
+                            Informatica: {student.Info} <br />
+                            Ed. Tehnologică: {student.Tehnologica} <br />
+                            Ed. Fizică: {student.EdFizica} <br />
+                          </React.Fragment>
+                        )}
                     <br/>
                   </li>
             ))}

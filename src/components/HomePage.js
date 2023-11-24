@@ -21,10 +21,10 @@ export const HomePage = () => {
         setSearchedStudent('');
         setSearchError('');
         setLoading(true);
-        let response = axios.get(`/elev/${searchIDNP}`);
+        let response = axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`);
         {selectedSem === "2"?
-          response = await axios.get(`/elev2/${searchIDNP}`):
-          response = await axios.get(`/elev/${searchIDNP}`)
+          response = await axios.get(`https://servergc.onrender.com/elev2/${searchIDNP}`):
+          response = await axios.get(`https://servergc.onrender.com/elev/${searchIDNP}`)
         }
         setSearchedStudent(response.data);
         setLoading('');
@@ -75,43 +75,74 @@ return (
         <p></p>
       )
       }
-
         {searchError && <p>{searchError}</p>}
-        {searchedStudent && (
+        {searchedStudent && (document.querySelector('.login-box').style.top = "62%") && (
           <div>
             <h2>Elev Details:</h2>
           <div class="infof">
                       IDNP: {searchedStudent.IDNP} <br />
-                      Name: {searchedStudent.Name} <br />
-                      Surname: {searchedStudent.Surname}<br />
-                      Class: {searchedStudent.Class} <br />
-                      Romana: {searchedStudent.Romana} <br />
-                      Eng/Fr: {searchedStudent.Engleza} <br />
-                      Rusa: {searchedStudent.Rusa} <br />
+                      Nume: {searchedStudent.Name} <br />
+                      Prenume: {searchedStudent.Surname}<br />
+                      Clasa: {searchedStudent.Class} <br />
+                      Limba Romana: {searchedStudent.Romana} <br />
+                      Engleza/Franceza: {searchedStudent.Engleza} <br />
+                      Limba Rusa: {searchedStudent.Rusa} <br />
                       Matematica: {searchedStudent.Mate} <br />
                       Istoria: {searchedStudent.Istoria} <br />
                       Geografia: {searchedStudent.Geografia} <br />
-                        {(searchedStudent.Class === 7 || searchedStudent.Class === 8 || searchedStudent.Class === 9) && (
+                      Ed. p/u Soc: {searchedStudent.MSV} <br />
+                        {searchedStudent.Class === 5 && (
                           <React.Fragment>
-                            Biologia: {searchedStudent.Biologia} <br />
-                            Fizica: {searchedStudent.Fizica} <br />
-                            Chimia: {searchedStudent.Chimia} <br />
-                            Info: {searchedStudent.Info} <br />
+                          Ed. Muzicală: {searchedStudent.Muzica} <br />
+                          Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                          Ed. Plastică: {searchedStudent.Plastica} <br />
+                          Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          Știinta: {searchedStudent.Stiinte} <br />
                           </React.Fragment>
                         )}
                         {searchedStudent.Class === 6 && (
                           <React.Fragment>
                             Biologia: {searchedStudent.Biologia} <br />
                             Fizica: {searchedStudent.Fizica} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Plastică: {searchedStudent.Plastica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
                           </React.Fragment>
                         )}
-                        {searchedStudent.Class === 5 && (
+                        {searchedStudent.Class === 7 && (
                           <React.Fragment>
-                          Stiinte: {searchedStudent.Stiinte} <br />
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Plastică: {searchedStudent.Plastica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
                           </React.Fragment>
                         )}
-                      {/* Biologia: {searchedStudent.Biologia} <br /> */}
-                      Optional: {searchedStudent.Optional} <br />
+                        {searchedStudent.Class === 8  && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Muzicală: {searchedStudent.Muzica} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
+                        {searchedStudent.Class === 9 && (
+                          <React.Fragment>
+                            Biologia: {searchedStudent.Biologia} <br />
+                            Fizica: {searchedStudent.Fizica} <br />
+                            Chimia: {searchedStudent.Chimia} <br />
+                            Informatica: {searchedStudent.Info} <br />
+                            Ed. Tehnologică: {searchedStudent.Tehnologica} <br />
+                            Ed. Fizică: {searchedStudent.EdFizica} <br />
+                          </React.Fragment>
+                        )}
                       <br/>
             <br/>
             </div>
