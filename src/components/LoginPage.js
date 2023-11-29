@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 import {Link} from 'react-router-dom';
 let token = "";
 const logo = require('./favicon0.png');
@@ -33,7 +34,8 @@ export const LoginPage = () => {
     } catch (error) {
       setSearchError('Server error');
       setIsUserExist(false);
-      alert("FailLogin")
+      swal("Login sau Parola gresita !", "Verifica corectitudinea datelor introduse", "warning");
+      
     }
   };
 

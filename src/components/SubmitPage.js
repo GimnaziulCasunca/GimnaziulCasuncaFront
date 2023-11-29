@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 const logo = require('./favicon0.png');
 
 let FinToken = localStorage.getItem('token'), User = localStorage.getItem('username') ;
@@ -77,18 +78,16 @@ export const SubmitPage = () => {
           setBiologia('');
           setRusa('');
           setOptional('');
-          message = "Student successfully added.";
-          alert(message);
+          swal("Elev adăugat !", "Elev adăugat cu succes !", "success");
         } catch (error) {
-          message = "There was a problem adding the elev or elev existe.";
-          alert(message);
+          swal("Probleme la adăugare !", "Probleme la adăugare sau așa elev deja există !", "warning");
           }
       }else 
         {
-          message = "Te rog Logează-te";
-          alert(message);
+          swal("Loghează-te !", "Loghează-te pentru a efectua modificări !", "info");
         }
     };
+    
 
   // Toti elevii 
   const ShowElevi = async (e) => {
@@ -106,12 +105,11 @@ export const SubmitPage = () => {
           setResponseMessage('');
         }
         catch (error) {
-        console.error('Error get med elev:', error.message);
+        console.error('Error get elevi:', error.message);
       }
-    }else 
+    }else
       {
-        message = "Te rog Logează-te";
-        alert(message);
+        swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
       }
   };
 
@@ -130,6 +128,7 @@ export const SubmitPage = () => {
         setSearchError('');
       } catch (error) {
           if (error.response && error.response.status === 404) {
+            swal("Nu există!", "Așa student nu a fost găsit!", "info");
             setSearchError('Elevul nu a fost găsit');
           } else {
             setSearchError('Server error');
@@ -139,8 +138,7 @@ export const SubmitPage = () => {
     }
     else 
       {
-        message = "Te rog Logează-te";
-        alert(message);
+        swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
       }
   };
 
@@ -180,7 +178,9 @@ export const SubmitPage = () => {
         setSearchError('');
       } catch (error) {
         if (error.response && error.response.status === 404) {
-          setSearchError('Student not found');
+          swal("Nu există!", "Așa student nu a fost găsit!", "info");
+          setSearchError('');
+          setSearchedStudent('');
         } else {
           setSearchError('Server error');
         }
@@ -189,8 +189,7 @@ export const SubmitPage = () => {
     }
     else 
       {
-        message = "Te rog Logează-te";
-        alert(message);
+        swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
       }
   };
   
@@ -229,16 +228,13 @@ export const SubmitPage = () => {
         setBiologia('');
         setRusa('');
         setOptional('');
-        message = "Elevul a fost modificat!";
-        alert(message);
+        swal("Elev modificat !", "Elev modificat cu succes !", "success");
       } catch (error) {
-        message = "Problema cu modificarea.";
-        alert(message);
+        swal("Problema la modificarea !", "Au apărut careva probleme la modificare !", "warning");
       }
     }else 
     {
-      message = "Te rog Logează-te";
-      alert(message);
+      swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
     }
 
 
@@ -249,30 +245,57 @@ export const SubmitPage = () => {
     e.preventDefault();
     if(FinToken){
       try {
-        del = prompt("Ești sigur ca doresti sa ștergi elevul (y,n)?");
-        if(del==='y') { 
-          let response;
+
+
+        // del = prompt("Ești sigur ca doresti sa ștergi elevul (y,n)?");
+        // if(del==='y') { 
+        //   let response;
+        //   {selectedSem === "2"?
+        //     response = await axios.delete(`https://servergc.onrender.com/delstud2/${IDNP}`):
+        //     response = await axios.delete(`https://servergc.onrender.com/delstud/${IDNP}`)
+        //   }
+        
+        //   alert("Elevu; a fost sters cu succes");
+        //   setResponseMessage('Elevul a fost șters!'); 
+        // }
+        // else{
+        //   alert("Elevul nu a fost șters");
+        // }
+
+
+        swal({
+          title: "Executi ștergerea ?",
+          text: "Sunteți sigur ca doresti sa ștergi elevul ?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(async (willDelete) => {
+          if (willDelete) {
+            swal("Elevul a fost șters cu succes !", {
+              icon: "success",
+            });
+            let response;
           {selectedSem === "2"?
             response = await axios.delete(`https://servergc.onrender.com/delstud2/${IDNP}`):
             response = await axios.delete(`https://servergc.onrender.com/delstud/${IDNP}`)
           }
-        
-          alert("Elev is deleted succes");
-          console.log(response.data); // Success message from the server
-          setResponseMessage('Elevul a fost șters!'); // Update the response message
-        }
-        else{
-          alert("Elevul nu a fost șters");
-        }
+          } else {
+            swal("Elevul nu a fost șters!");
+          }
+        });
+
+
+
+
       } catch (error) {
-        alert("Eror");
+        swal("Eroare !", "Eroare necunoscută", "warning");
         console.error('A Aparut o eroare:', error.message);
-        setResponseMessage('A Aparut o eroare.'); // Update the response message
+        setResponseMessage('A Aparut o eroare.'); 
       }
     }else 
     {
-      message = "Te rog Logează-te";
-      alert(message);
+      swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
     }
 
   };
@@ -298,8 +321,7 @@ export const SubmitPage = () => {
       }
     }else 
     {
-      message = "Te rog Logează-te";
-      alert(message);
+      swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
     }
   };
 
@@ -327,8 +349,7 @@ export const SubmitPage = () => {
       }
     }else 
     {
-      message = "Te rog Logează-te";
-      alert(message);
+      swal("Te rog Logează-te !", "Pentru a executa modificări Logează-te", "info");
     }
   };
 

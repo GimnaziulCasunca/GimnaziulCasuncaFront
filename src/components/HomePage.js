@@ -75,7 +75,7 @@ return (
         <p></p>
       )
       }
-        {searchError && <p>{searchError}</p>}
+        {searchError && (document.querySelector('.login-box').style.top = "50%") && <p>{searchError}</p>}
         {searchedStudent && (document.querySelector('.login-box').style.top = "62%") && (
           <div>
             <h2>Elev Details:</h2>
