@@ -91,6 +91,7 @@ return (
                       Istoria: {searchedStudent.Istoria} <br />
                       Geografia: {searchedStudent.Geografia} <br />
                       Ed. p/u Soc: {searchedStudent.MSV} <br />
+                      Optional: {searchedStudent.Optional} <br />
                         {searchedStudent.Class === 5 && (
                           <React.Fragment>
                           Ed. Muzicală: {searchedStudent.Muzica} <br />

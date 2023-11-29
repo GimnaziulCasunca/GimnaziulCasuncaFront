@@ -469,6 +469,11 @@ export const SubmitPage = () => {
         <td><input type="text" value={Rusa} onChange={(e) => setRusa(e.target.value)} /></td>
         </tr>
 
+        <tr>
+        <td>Optional:</td>
+        <td><input type="text" value={Optional} onChange={(e) => setOptional(e.target.value)} /></td>
+        </tr>
+
       </form>
         <button onClick={ShowElevi} class = "admn">Toti Elevii</button>
         <button onClick={ModifyElev} class = "admn">Modifică</button>
@@ -580,7 +585,8 @@ export const SubmitPage = () => {
                       Matematica: {searchedStudent.Mate} <br />
                       Istoria: {searchedStudent.Istoria} <br />
                       Geografia: {searchedStudent.Geografia} <br />
-                      Ed. p/u Soc: {searchedStudent.Geografia} <br />
+                      Ed. p/u Soc: {searchedStudent.MSV} <br />
+                      Optional: {searchedStudent.Optional} <br />
                         {searchedStudent.Class === 5 && (
                           <React.Fragment>
                           Ed. Muzicală: {searchedStudent.Muzica} <br />
@@ -654,7 +660,8 @@ export const SubmitPage = () => {
                       Matematica: {student.Mate} <br />
                       Istoria: {student.Istoria} <br />
                       Geografia: {student.Geografia} <br />
-                      Ed. p/u Soc: {student.Geografia} <br />
+                      Ed. p/u Soc: {student.MSV} <br />
+                      Optional: {student.Optional} <br />
                         {student.Class === 5 && (
                           <React.Fragment>
                           Ed. Muzicală: {student.Muzica} <br />
@@ -731,7 +738,8 @@ export const SubmitPage = () => {
                       Matematica: {student.Mate} <br />
                       Istoria: {student.Istoria} <br />
                       Geografia: {student.Geografia} <br />
-                      Ed. p/u Soc: {student.Geografia} <br />
+                      Ed. p/u Soc: {student.MSV} <br />
+                      Optional: {student.Optional} <br />
                         {student.Class === 5 && (
                           <React.Fragment>
                           Ed. Muzicală: {student.Muzica} <br />
